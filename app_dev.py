@@ -10,6 +10,8 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed  # ✅ ADDED
 import requests
 
+st.write("VERSION CHECK: NEW CODE RUNNING")
+
 PASSWORD = "firstpass-test1409"
 
 if "auth" not in st.session_state:

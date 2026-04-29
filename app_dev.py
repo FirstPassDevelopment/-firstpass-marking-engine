@@ -180,13 +180,12 @@ Focus on:
 {text}
 """
 
-    res = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
-    )
+    res = client.responses.create(
+    model="gpt-4.1-mini",
+    input=prompt
+)
 
-    return res.choices[0].message.content
+    return res.output[0].content[0].text
 
 # -----------------------
 # PASS 2
@@ -298,13 +297,12 @@ Areas for Improvement:
 - point
 """
 
-    res = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.5
-    )
+    res = client.responses.create(
+    model="gpt-4.1-mini",
+    input=prompt
+)
 
-    return enforce_au_spelling(res.choices[0].message.content)
+    return enforce_au_spelling(res.output[0].content[0].text)
 
 # -----------------------
 # INSIGHTS
@@ -381,13 +379,12 @@ Instructional Priorities:
 - reteach focus + how to teach it + what students will produce
 """
 
-    res = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
-    )
+    res = client.responses.create(
+    model="gpt-4.1-mini",
+    input=prompt
+)
 
-    return enforce_au_spelling(res.choices[0].message.content)
+    return enforce_au_spelling(res.output[0].content[0].text)
 
 # -----------------------
 # UI

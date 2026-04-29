@@ -5,7 +5,6 @@ import io
 import re
 from statistics import mean
 from openai import OpenAI
-from dotenv import dotenv_values
 from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.worksheet.table import Table, TableStyleInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed  # ✅ ADDED

@@ -11,6 +11,19 @@ from openpyxl.worksheet.table import Table, TableStyleInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed  # ✅ ADDED
 import requests
 
+PASSWORD = "firstpass-test1409"
+
+if "auth" not in st.session_state:
+    st.session_state.auth = False
+
+if not st.session_state.auth:
+    pw = st.text_input("Enter password", type="password")
+    if pw == PASSWORD:
+        st.session_state.auth = True
+        st.rerun()
+    else:
+        st.stop()
+
 # -----------------------
 # ENV
 # -----------------------

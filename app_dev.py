@@ -28,8 +28,8 @@ if not st.session_state.auth:
 # ENV
 # -----------------------
 
-config = dotenv_values(".env")
-api_key = config.get("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
+import os
+api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:
     st.error("Missing API key")

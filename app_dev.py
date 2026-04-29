@@ -12,6 +12,8 @@ import requests
 
 st.write("VERSION CHECK: NEW CODE RUNNING")
 
+st.write("ENV KEY RAW:", repr(os.getenv("OPENAI_API_KEY")))
+
 PASSWORD = "firstpass-test1409"
 
 if "auth" not in st.session_state:

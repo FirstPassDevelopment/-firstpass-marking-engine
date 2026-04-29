@@ -32,6 +32,9 @@ if not st.session_state.auth:
 # -----------------------
 
 import os
+
+st.write("ENV KEY RAW:", repr(os.getenv("OPENAI_API_KEY")))
+
 api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:

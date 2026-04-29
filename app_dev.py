@@ -19,12 +19,18 @@ if "auth" not in st.session_state:
     st.session_state.auth = False
 
 if not st.session_state.auth:
-    pw = st.text_input("Enter password", type="password")
-    if pw == PASSWORD:
-        st.session_state.auth = True
-        st.rerun()
-    else:
-        st.stop()
+    with st.form("login_form"):
+        pw = st.text_input("Enter password", type="password")
+        submitted = st.form_submit_button("Login")
+
+        if submitted:
+            if pw == PASSWORD:
+                st.session_state.auth = True
+                st.rerun()
+            else:
+                st.error("Incorrect password")
+
+    st.stop()
 
 # -----------------------
 # ENV

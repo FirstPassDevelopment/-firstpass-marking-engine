@@ -29,7 +29,7 @@ if not st.session_state.auth:
 # -----------------------
 
 config = dotenv_values(".env")
-api_key = config.get("OPENAI_API_KEY")
+api_key = config.get("OPENAI_API_KEY") or st.secrets.get("OPENAI_API_KEY")
 
 if not api_key:
     st.error("Missing API key")
@@ -130,10 +130,8 @@ def parse_feedback(feedback):
 
     return sections
 
-import requests
-
 def send_feedback(feedback_text, results_data):
-    endpoint = "https://formspree.io/f/maqardlg"  # replace with yours
+    endpoint = "https://formspree.io/f/maqardlg"
 
     payload = {
         "feedback": feedback_text,
@@ -520,13 +518,13 @@ if st.session_state.results:
             else:
                 st.warning("Not saved yet")
 
-                st.write("### Feedback")
+    st.write("### Feedback")
 
-feedback_input = st.text_area("Provide feedback on marking quality")
+    feedback_input = st.text_area("Provide feedback on marking quality")
 
-if st.button("Submit Feedback"):
-    send_feedback(feedback_input, st.session_state.results)
-    st.success("Feedback sent")
+    if st.button("Submit Feedback"):
+        send_feedback(feedback_input, st.session_state.results)
+        st.success("Feedback sent")
 
 # -----------------------
 # EXCEL EXPORT

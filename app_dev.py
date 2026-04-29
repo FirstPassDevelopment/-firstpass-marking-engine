@@ -9,10 +9,9 @@ from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.worksheet.table import Table, TableStyleInfo
 from concurrent.futures import ThreadPoolExecutor, as_completed  # ✅ ADDED
 import requests
+import os
 
 st.write("VERSION CHECK: NEW CODE RUNNING")
-
-st.write("ENV KEY RAW:", repr(os.getenv("OPENAI_API_KEY")))
 
 PASSWORD = "firstpass-test1409"
 
@@ -31,14 +30,12 @@ if not st.session_state.auth:
 # ENV
 # -----------------------
 
-import os
-
-st.write("ENV KEY RAW:", repr(os.getenv("OPENAI_API_KEY")))
-
 api_key = os.getenv("OPENAI_API_KEY")
 
-if not api_key:
-    st.error("Missing API key")
+st.write("ENV KEY RAW:", repr(api_key))
+
+if not api_key or not api_key.startswith("sk-"):
+    st.error("Invalid or missing API key")
     st.stop()
 
 client = OpenAI(api_key=api_key.strip())

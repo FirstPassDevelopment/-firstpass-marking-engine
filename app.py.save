@@ -1,0 +1,62 @@
+client = OpenAI(api_key="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")client = OpenAI(api_key="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")nano app.py
+import streamlit as st
+from openai import OpenAI
+
+client = OpenAI()
+
+st.set_page_config(page_title="FirstPass", layout="wide")
+
+st.title("FirstPass Marking Engine V1")
+
+year_level = st.selectbox(
+    "Select Year Level",
+    ["Year 7", "Year 8", "Year 9", "Year 10"]
+)
+
+rubric = st.text_area("Paste Rubric Here", height=150)
+student_response = st.text_area("Paste Student Response", height=300)
+
+if st.button("Mark Response"):
+
+    if student_response.strip() == "":
+        st.warning("Please paste a student response.")
+    else:
+        prompt = f"""
+You are an expert Australian secondary English teacher.
+
+Mark this {year_level} response using ACARA standards.
+
+Rules:
+- No analysis = max C
+- No techniques = max C
+- Weak structure = max C/D
+- Quotes without explanation = max C
+
+Output:
+
+Overall Grade:
+Justification:
+Strengths:
+Areas for Improvement:
+
+---
+
+RUBRIC:
+{rubric}
+
+---
+
+RESPONSE:
+{student_response}
+"""
+
+        with st.spinner("Marking..."):
+            result = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}]
+            )
+
+        output = result.choices[0].message.content
+
+        st.subheader("Result")
+        st.write(output)

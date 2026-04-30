@@ -412,7 +412,26 @@ student_files = st.file_uploader("Student Files", type=["docx"], accept_multiple
 
 status = st.empty()
 
-if st.button("Run Marking"):
+col1, col2 = st.columns(2)
+
+with col1:
+    run_clicked = st.button(
+        "▶ Run Marking",
+        use_container_width=True
+    )
+
+with col2:
+    if st.button(
+        "🔄 Mark New Set",
+        use_container_width=True
+    ):
+        st.session_state.results = None
+        st.session_state.counts = None
+        st.session_state.comments = {}
+        st.session_state.comment_saved = {}
+        st.rerun()
+
+if run_clicked:
 
     summaries = []
     word_counts = []

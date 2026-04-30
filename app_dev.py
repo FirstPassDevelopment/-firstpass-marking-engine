@@ -11,15 +11,29 @@ from concurrent.futures import ThreadPoolExecutor, as_completed  # ✅ ADDED
 import requests
 import os
 
-st.write("VERSION CHECK: NEW CODE RUNNING")
+PASSWORD = os.getenv("APP_PASSWORD", "fallback-password")
 
+if "auth" not in st.session_state:
+    st.session_state.auth = False
+
+if not st.session_state.auth:
+    with st.form("login_form"):
+        pw = st.text_input("Enter password", type="password")
+        submitted = st.form_submit_button("Login")
+
+    if submitted:
+        if pw == PASSWORD:
+            st.session_state.auth = True
+            st.rerun()
+        else:
+            st.error("Incorrect password")
+
+    st.stop()
 # -----------------------
 # ENV
 # -----------------------
 
 api_key = os.getenv("OPENAI_API_KEY")
-
-st.write("ENV KEY RAW:", repr(api_key))
 
 if not api_key or not api_key.startswith("sk-"):
     st.error("Invalid or missing API key")

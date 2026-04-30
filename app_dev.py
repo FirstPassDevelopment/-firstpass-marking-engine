@@ -65,6 +65,9 @@ if "comments" not in st.session_state:
 if "comment_saved" not in st.session_state:
     st.session_state.comment_saved = {}
 
+if "uploader_key" not in st.session_state:
+    st.session_state.uploader_key = 0
+
 # -----------------------
 # ACARA
 # -----------------------
@@ -406,9 +409,24 @@ Instructional Priorities:
 
 year = st.selectbox("Year", ["Year 7", "Year 8", "Year 9", "Year 10"])
 task_type = st.selectbox("Task Type", ["Analytical","Creative","Hybrid","Persuasive","Short Response"])
-task_file = st.file_uploader("Task Sheet (.docx)", type=["docx"])
-rubric_file = st.file_uploader("Rubric (.docx)", type=["docx"])
-student_files = st.file_uploader("Student Files", type=["docx"], accept_multiple_files=True)
+task_file = st.file_uploader(
+    "Task Sheet (.docx)",
+    type=["docx"],
+    key=f"task_{st.session_state.uploader_key}"
+)
+
+rubric_file = st.file_uploader(
+    "Rubric (.docx)",
+    type=["docx"],
+    key=f"rubric_{st.session_state.uploader_key}"
+)
+
+student_files = st.file_uploader(
+    "Student Files",
+    type=["docx"],
+    accept_multiple_files=True,
+    key=f"students_{st.session_state.uploader_key}"
+)
 
 status = st.empty()
 
@@ -430,6 +448,7 @@ with col2:
         st.session_state.comments = {}
         st.session_state.comment_saved = {}
         st.rerun()
+        st.session_state.uploader_key += 1
 
 if run_clicked:
 

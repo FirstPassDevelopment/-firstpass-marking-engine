@@ -505,19 +505,20 @@ if st.session_state.results:
             existing = st.session_state.comments.get(key, "")
 
             comment = st.text_input(
-                "✏️ Teacher Comment (press Enter to save)",
-                value=existing,
-                key=key
-            )
+                
+    "✏️ Teacher Comment (click save)",
+    value=existing,
+    key=key
+)
 
-            if comment != existing:
-                st.session_state.comments[key] = comment
-                st.session_state.comment_saved[saved_key] = True
+if st.button("Save Comment", key=f"save_btn_{i}"):
+    st.session_state.comments[key] = comment
+    st.session_state.comment_saved[saved_key] = True
 
-            if st.session_state.comment_saved.get(saved_key):
-                st.success("Comment saved")
-            else:
-                st.warning("Not saved yet")
+if st.session_state.comment_saved.get(saved_key):
+    st.success("Comment saved")
+else:
+    st.warning("Not saved yet")
 
     st.write("### Feedback")
 

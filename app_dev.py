@@ -68,6 +68,9 @@ if "comment_saved" not in st.session_state:
 if "uploader_key" not in st.session_state:
     st.session_state.uploader_key = 0
 
+if "reset_uploaders" not in st.session_state:
+    st.session_state.reset_uploaders = False
+
 # -----------------------
 # ACARA
 # -----------------------
@@ -447,8 +450,10 @@ with col2:
         st.session_state.counts = None
         st.session_state.comments = {}
         st.session_state.comment_saved = {}
-        st.rerun()
+        
         st.session_state.uploader_key += 1
+
+        st.rerun()
 
 if run_clicked:
 

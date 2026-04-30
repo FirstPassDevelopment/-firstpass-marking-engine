@@ -195,9 +195,9 @@ Focus on:
 """
 
     res = client.responses.create(
-    model="gpt-4.1-mini",
-    input=prompt
-)
+        model="gpt-4.1-mini",
+        input=prompt
+    )
 
     return res.output[0].content[0].text
 
@@ -312,9 +312,9 @@ Areas for Improvement:
 """
 
     res = client.responses.create(
-    model="gpt-4.1-mini",
-    input=prompt
-)
+        model="gpt-4.1-mini",
+        input=prompt
+    )
 
     return enforce_au_spelling(res.output[0].content[0].text)
 
@@ -394,9 +394,9 @@ Instructional Priorities:
 """
 
     res = client.responses.create(
-    model="gpt-4.1-mini",
-    input=prompt
-)
+        model="gpt-4.1-mini",
+        input=prompt
+    )
 
     return enforce_au_spelling(res.output[0].content[0].text)
 
@@ -479,53 +479,73 @@ if st.button("Run Marking"):
     st.session_state.counts = counts
 
 # -----------------------
+
 # DISPLAY
+
 # -----------------------
 
 if st.session_state.results:
 
     st.write("### Distribution")
+
     st.write(st.session_state.counts)
 
     st.write("### Cohort Insights")
+
     st.write(generate_cohort_insights(st.session_state.results))
 
     for i, r in enumerate(st.session_state.results):
+
         st.write(f"Student {i+1} | {r['grade']}")
 
         if r["length_flag"]:
+
             st.warning("⚠️ This response is significantly shorter than the cohort")
 
         with st.expander("Feedback"):
+
             st.text(r["feedback"])
 
             key = f"comment_{i}"
+
             saved_key = f"saved_{i}"
 
             existing = st.session_state.comments.get(key, "")
 
             comment = st.text_input(
-                
-    "✏️ Teacher Comment (click save)",
-    value=existing,
-    key=key
-)
 
-if st.button("Save Comment", key=f"save_btn_{i}"):
-    st.session_state.comments[key] = comment
-    st.session_state.comment_saved[saved_key] = True
+                "✏️ Teacher Comment (click save)",
 
-if st.session_state.comment_saved.get(saved_key):
-    st.success("Comment saved")
-else:
-    st.warning("Not saved yet")
+                value=existing,
+
+                key=key
+
+            )
+
+            if st.button("Save Comment", key=f"save_btn_{i}"):
+
+                st.session_state.comments[key] = comment
+
+                st.session_state.comment_saved[saved_key] = True
+
+            if st.session_state.comment_saved.get(saved_key):
+
+                st.success("Comment saved")
+
+            else:
+
+                st.warning("Not saved yet")
+
+    # 👇 OUTSIDE LOOP (important)
 
     st.write("### Feedback")
 
     feedback_input = st.text_area("Provide feedback on marking quality")
 
     if st.button("Submit Feedback"):
+
         send_feedback(feedback_input, st.session_state.results)
+
         st.success("Feedback sent")
 
 # -----------------------

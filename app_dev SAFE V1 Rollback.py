@@ -464,18 +464,10 @@ if run_clicked:
 
     for f in student_files:
         text = extract_text(f)
-
-        # --- SAFE ANONYMISATION LAYER ---
-        def anonymise_text(text):
-            text = re.sub(r"\b[A-Z][a-z]{2,}\b", "Student", text)
-            return text
-
-        anon_text = anonymise_text(text)
-
-        wc = len(anon_text.split())
+        wc = len(text.split())
         word_counts.append(wc)
 
-        s = summarise(anon_text, task_type)
+        s = summarise(text, task_type)
         summaries.append((f.name, s, wc))
 
     avg_wc = mean(word_counts) if word_counts else 0

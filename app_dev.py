@@ -467,7 +467,8 @@ if run_clicked:
 
         # --- SAFE ANONYMISATION LAYER ---
         def anonymise_text(text):
-            text = re.sub(r"\b[A-Z][a-z]{2,}\b", "Student", text)
+    # Replace likely names only (capitalised words NOT at sentence start)
+            text = re.sub(r"(?<!\.)\s[A-Z][a-z]{2,}", " Student", text)
             return text
 
         anon_text = anonymise_text(text)

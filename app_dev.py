@@ -61,7 +61,7 @@ FirstPass is an AI-assisted marking tool designed to provide a fast, consistent 
 ---
 
 ### How do I use it?
-1. Upload your task sheet and rubric (optional but recommended)
+1. Upload your task sheet and rubric (**strongly recommended for best accuracy**)
 2. Upload student responses (.docx files)
 3. Click **Run Marking**
 4. Review results and download the Excel summary
@@ -69,10 +69,14 @@ FirstPass is an AI-assisted marking tool designed to provide a fast, consistent 
 ---
 
 ### Is student data safe?
-- Student work is processed **within the session only**
-- No identifying data is stored
-- Responses are **anonymised before analysis**
-- File names are only used in the Excel export for your reference
+                
+FirstPass is being intentionally built from the ground up with security and privacy in mind.
+
+
+- Student work is processed **within the session only**.
+- No identifying data is stored at any point.
+- Responses are first **anonymised before analysis** takes place.
+- File names are only used in the Excel export for your reference.
 
 ---
 
@@ -107,8 +111,9 @@ If effective, it has the potential to:
 - give teachers more time and energy outside of school
 
 Your feedback is helping shape a tool designed specifically for teachers.
+This is being developed by a fellow teacher, with classroom use in mind.
 
-Thank you for taking the time to test it.
+Thank you for taking the time to help test it!
 """)
     
 if "results" not in st.session_state:

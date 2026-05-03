@@ -47,12 +47,70 @@ client = OpenAI(api_key=api_key.strip())
 
 st.set_page_config(page_title="FirstPass Marking Engine – Stable", layout="wide")
 st.title("FirstPass Marking Engine – Stable")
-st.caption("Version 1.0 – Stable")
+st.caption("Version 1.0 (Stable Test Phase)")
 
 st.info("FirstPass provides an AI-assisted first-pass judgement. Final grading decisions remain the responsibility of the teacher.")
 
 st.caption("Designed for Australian secondary classrooms using rubric-based marking aligned to ACARA standards.")
 
+with st.expander("ℹ️ About FirstPass (click to expand)"):
+    st.markdown("""
+### What is FirstPass?
+FirstPass is an AI-assisted marking tool designed to provide a fast, consistent first-pass judgement on student work. It generates indicative grades, structured feedback, and cohort insights to support teacher decision-making.
+
+---
+
+### How do I use it?
+1. Upload your task sheet and rubric (optional but recommended)
+2. Upload student responses (.docx files)
+3. Click **Run Marking**
+4. Review results and download the Excel summary
+
+---
+
+### Is student data safe?
+- Student work is processed **within the session only**
+- No identifying data is stored
+- Responses are **anonymised before analysis**
+- File names are only used in the Excel export for your reference
+
+---
+
+### What should I look for in the output?
+- Are the grades roughly aligned with your expectations?
+- Is the feedback clear and useful?
+- Do the cohort insights reflect real patterns in your class?
+
+---
+
+### How can I give useful feedback?
+During this testing phase, your input is extremely valuable.
+
+If a grade is noticeably different from what you would expect:
+- Note the student (e.g. Student 3)
+- State the grade you would give instead
+- Briefly explain why
+
+You can also comment on:
+- grading accuracy
+- clarity of feedback
+- usefulness in real classroom marking
+
+---
+
+### Thank you for testing FirstPass
+This tool is being built to reduce the time and cognitive load of marking, while maintaining professional judgement and consistency.
+
+If effective, it has the potential to:
+- support early career teachers
+- reduce marking fatigue
+- give teachers more time and energy outside of school
+
+Your feedback is helping shape a tool designed specifically for teachers.
+
+Thank you for taking the time to test it.
+""")
+    
 if "results" not in st.session_state:
     st.session_state.results = None
 
